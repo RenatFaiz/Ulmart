@@ -5,20 +5,26 @@ import ru.itpark.model.Product;
 import java.util.Collection;
 import java.util.LinkedList;
 
-public class ProductRepository {
+
+public class ProductRepository<T> {
     private final Collection<Product> products = new LinkedList<>();
     private long nextId = 1;
-    private int productCategory;
 
-    public void setCategory(int productCategory) {
-        this.productCategory = productCategory;
-    }
 
-    public void addProduct(Product item) {
+    public void create(Product item) {
         if (item.getId() == 0) {
             item.setId(nextId++);
         }
         products.add(item);
+    }
+//    public Product read(T t) {
+//        //if (id.equals(id.getId()))
+//        return ;
+//    }
+
+    public void delete(Product item) {
+        item.getId();
+       // products.removeIf();
     }
     public Collection<Product> getAll() {
         return products;

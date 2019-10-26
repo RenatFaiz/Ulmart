@@ -1,15 +1,14 @@
 package ru.itpark.service;
 
+import ru.itpark.comparator.ProductByPriceComparator;
 import ru.itpark.model.Product;
 import ru.itpark.repository.ProductRepository;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ProductService {
     private final ProductRepository repository;
+    private String reponame = "Основной репозиторий";
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
@@ -28,12 +27,25 @@ public class ProductService {
     public void deleteProduct(Product item) {
         repository.delete(item);
     }
+
+    public List<Product> getSortedByPrice() {
+        return getSortedBy(new ProductByPriceComparator());
+    }
+
     public List<Product> getSortedBy(Comparator<Product> comparator) {
         List<Product> results = new LinkedList<>(repository.getAll());
         results.sort(comparator);
         return results;
     }
+    public Collection<Product> display() {
+        System.out.println(repository.getAll());
+        return repository.getAll();
+    }
 
+    @Override
+    public String toString() {
+        return reponame;
+    }
 }
 
 

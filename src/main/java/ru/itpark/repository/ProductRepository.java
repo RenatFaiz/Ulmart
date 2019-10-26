@@ -7,6 +7,8 @@ import java.util.LinkedList;
 
 
 public class ProductRepository<T> {
+
+
     private final Collection<Product> products = new LinkedList<>();
     private long nextId = 1;
 
@@ -17,15 +19,17 @@ public class ProductRepository<T> {
         }
         products.add(item);
     }
-//    public Product read(T t) {
-//        //if (id.equals(id.getId()))
-//        return ;
-//    }
+
+    public String read() {
+        //if (id.equals(id.getId()))
+        return products.toString();
+    }
 
     public void delete(Product item) {
         item.getId();
-       // products.removeIf();
+        // products.removeIf();
     }
+
     public Collection<Product> getAll() {
         return products;
     }

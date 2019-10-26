@@ -16,20 +16,21 @@ public class Product<T> {
     private String review;
     private String badge;
     private T feature;
-    private Collection<Photo> gallery;
-
-    class Photo {
-        Photo(String URL) {}
-    }
+    private String gallery;
+//    private Collection<Photo> gallery;
+//
+//    class Photo {
+//        Photo(String URL) {}
+//    }
 
     private String description;
     private int price;
-    private int productCategory; // возможно, лучше String
+    private String productCategory; // возможно, лучше String
 
     public Product(long id, String name, String fullName, double rating,
                    String review, String badge, T feature,
-                   Collection<Photo> gallery, String description,
-                   int price, int productCategory) {
+                   String gallery, String description,
+                   int price, String productCategory) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -43,7 +44,7 @@ public class Product<T> {
         this.productCategory = productCategory;
     }
 
-    public void setCategory(int productCategory) {
+    public void setCategory(String productCategory) {
         this.productCategory = productCategory;
     }
 
@@ -55,5 +56,10 @@ public class Product<T> {
 
     public void toFavorites() {
 
+    }
+
+    @Override
+    public String toString() {
+        return name + "\t" + price + " руб.";
     }
 }

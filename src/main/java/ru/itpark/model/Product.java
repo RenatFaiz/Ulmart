@@ -25,7 +25,7 @@ public class Product<T> {
 
     private String description;
     private int price;
-    private String productCategory; // возможно, лучше String
+    private String productCategory; // возможно, лучше int
 
     public Product(long id, String name, String fullName, double rating,
                    String review, String badge, T feature,

@@ -60,6 +60,6 @@ public class Product<T> {
 
     @Override
     public String toString() {
-        return name + "\t" + price + " руб.";
+        return name + "\t" + price + " руб.\n";
     }
 }

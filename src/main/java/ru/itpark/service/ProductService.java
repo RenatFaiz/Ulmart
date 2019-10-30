@@ -1,17 +1,16 @@
 package ru.itpark.service;
 
-import ru.itpark.comparator.ProductByPriceComparator;
 import ru.itpark.model.Product;
 import ru.itpark.repository.ProductRepository;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class ProductService {
     private final ProductRepository repository;
     private String repositoryName = "Основной репозиторий";
     //List list = getList();  // инициализируйте этот список
     // Class<? extends ProductService> results = getClass();
-
 
 
     public ProductService(ProductRepository repository) {
@@ -29,8 +28,10 @@ public class ProductService {
         repository.create(item);
     }
 
-    public void deleteProduct(Product item) {
-        repository.delete(item);
+    public void deleteProduct(long id) {
+        if (id > 0) {
+            repository.delete(id);
+        }
     }
 
 //    public List<Product> getSortedByPrice() {
@@ -50,9 +51,10 @@ public class ProductService {
 
     public List<Product> getSortedByName() {
         List<Product> results = new LinkedList<>(repository.getAll());
-        Collections.sort(results, (Comparator<Product>) (p1, p2) -> p1.getName().compareTo(p2.getName()));
+        results.sort((Comparator<Product>) (p1, p2) -> p1.getName().compareTo(p2.getName()));
         return results;
     }
+
     public List<Product> getSortedByPriceAsc() {
         List<Product> results = new LinkedList<>(repository.getAll());
         Collections.sort(results, (Comparator<Product>) (p1, p2) -> p1.getPrice() - p2.getPrice());

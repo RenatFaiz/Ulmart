@@ -25,9 +25,8 @@ public class ProductRepository<T> {
         return products.toString();
     }
 
-    public void delete(Product item) {
-        item.getId();
-        // products.removeIf();
+    public void delete(long id) {
+        products.removeIf((Product p) -> p.getId() == id);
     }
 
     public Collection<Product> getAll() {

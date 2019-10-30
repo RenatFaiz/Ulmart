@@ -38,9 +38,11 @@ public class Main {
                         "технология Toshiba BiCS FLASH обеспечивает более высокую пропускную способность, " +
                         "выносливость, производительность и эффективность в одном и том же месте," +
                         " обеспечивая передовые технологии хранения.", 1800, "Комплектующие для ПК"));
-        System.out.println(service.getSortedByPriceAsc());
+//        System.out.println(service.getSortedByPriceAsc());
         System.out.println(service.getSortedByName());
-        service.searchByName("SSD");
+//        service.searchByName("SSD");
+
+        service.deleteProduct(1);
         service.display();
     }
 }

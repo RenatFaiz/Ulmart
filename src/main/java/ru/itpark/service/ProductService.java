@@ -13,6 +13,7 @@ public class ProductService {
     // Class<? extends ProductService> results = getClass();
 
 
+
     public ProductService(ProductRepository repository) {
         this.repository = repository;
     }
@@ -32,15 +33,15 @@ public class ProductService {
         repository.delete(item);
     }
 
-    public List<Product> getSortedByPrice() {
-        return getSortedBy(new ProductByPriceComparator());
-    }
-
-    public List<Product> getSortedBy(Comparator<Product> comparator) {
-        List<Product> results = new LinkedList<>(repository.getAll());
-        results.sort(comparator);
-        return results;
-    }
+//    public List<Product> getSortedByPrice() {
+//        return getSortedBy(new ProductByPriceComparator());
+//    }
+//
+//    public List<Product> getSortedBy(Comparator<Product> comparator) {
+//        //List<Product> results = new LinkedList<>(repository.getAll());
+//        results.sort(comparator);
+//        return results;
+//    }
 
     public Collection<Product> display() {
         System.out.println(repository.getAll());
@@ -52,15 +53,21 @@ public class ProductService {
         Collections.sort(results, (Comparator<Product>) (p1, p2) -> p1.getName().compareTo(p2.getName()));
         return results;
     }
+    public List<Product> getSortedByPriceAsc() {
+        List<Product> results = new LinkedList<>(repository.getAll());
+        Collections.sort(results, (Comparator<Product>) (p1, p2) -> p1.getPrice() - p2.getPrice());
+        return results;
+    }
 
     @Override
     public String toString() {
         return repositoryName;
     }
 
+
     public List<Product> searchByName(String name) {
         List<Product> results = new LinkedList<>(repository.getAll());
-        if (name == null || name == "") {
+        if (name == null || name.equals("")) {
             throw new IllegalArgumentException("введите название");
         }
         for (Product p : results) {
@@ -73,10 +80,6 @@ public class ProductService {
 }
 
 
-//    public List<Product> searchByName(Product item) {
-//        List<Product> results = new ArrayList<Product>();
-//        return results;
-//    }
 //    public List<Product> displayByCategory(Product item) {
 //        List<Product> category = new ArrayList<>();
 //        return category;

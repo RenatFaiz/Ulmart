@@ -9,6 +9,8 @@ import java.util.*;
 public class ProductService {
     private final ProductRepository repository;
     private String repositoryName = "Основной репозиторий";
+    //List list = getList();  // инициализируйте этот список
+    // Class<? extends ProductService> results = getClass();
 
 
     public ProductService(ProductRepository repository) {
@@ -54,6 +56,19 @@ public class ProductService {
     @Override
     public String toString() {
         return repositoryName;
+    }
+
+    public List<Product> searchByName(String name) {
+        List<Product> results = new LinkedList<>(repository.getAll());
+        if (name == null || name == "") {
+            throw new IllegalArgumentException("введите название");
+        }
+        for (Product p : results) {
+            if (p.getName().toLowerCase().contains(name.toLowerCase())) {
+                System.out.println(p.toString());
+            }
+        }
+        return results;
     }
 }
 

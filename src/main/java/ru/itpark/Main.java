@@ -30,7 +30,16 @@ public class Main {
                         "технология Toshiba BiCS FLASH обеспечивает более высокую пропускную способность, " +
                         "выносливость, производительность и эффективность в одном и том же месте," +
                         " обеспечивая передовые технологии хранения.", 3200, "Комплектующие для ПК"));
+        service.addProduct(new Product(0, "HDD накопитель 580ГБ, 2.5\", " +
+                "SATA III, HITACHI", "HDD накопитель 580ГБ, 2.5\", SATA III, HITACHI", 5,
+                "https://www.ulmart.ru/goods/4549536#tab-reviews", "Выгодная покупка",
+                240, "https://p.fast.ulmart.ru/p/big/44.jpg",
+                "Благодаря 64-слойной структуре с вертикальной укладкой, " +
+                        "технология Toshiba BiCS FLASH обеспечивает более высокую пропускную способность, " +
+                        "выносливость, производительность и эффективность в одном и том же месте," +
+                        " обеспечивая передовые технологии хранения.", 1800, "Комплектующие для ПК"));
         System.out.println(service.getSortedByPrice());
-        //service.display();
+        System.out.println(service.getSortedByName());
+       // service.display();
     }
 }

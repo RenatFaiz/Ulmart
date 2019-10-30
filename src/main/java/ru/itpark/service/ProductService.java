@@ -8,11 +8,13 @@ import java.util.*;
 
 public class ProductService {
     private final ProductRepository repository;
-    private String reponame = "Основной репозиторий";
+    private String repositoryName = "Основной репозиторий";
+
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
     }
+
 
     public void addProduct(Product item) {
         if (item.getId() != 0) {
@@ -37,17 +39,23 @@ public class ProductService {
         results.sort(comparator);
         return results;
     }
+
     public Collection<Product> display() {
         System.out.println(repository.getAll());
         return repository.getAll();
     }
 
+    public List<Product> getSortedByName() {
+        List<Product> results = new LinkedList<>(repository.getAll());
+        Collections.sort(results, (Comparator<Product>) (p1, p2) -> p1.getName().compareTo(p2.getName()));
+        return results;
+    }
+
     @Override
     public String toString() {
-        return reponame;
+        return repositoryName;
     }
 }
-
 
 
 //    public List<Product> searchByName(Product item) {

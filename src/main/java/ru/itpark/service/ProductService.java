@@ -7,12 +7,12 @@ import java.util.*;
 
 public class ProductService {
     private final ProductRepository repository;
-    private String repositoryName = "Основной репозиторий";
+    private int fromIndex = 0;
+    private int maxIndex = 10;
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
     }
-
 
     public void addProduct(Product item) {
         if (item.getId() != 0) {
@@ -45,16 +45,21 @@ public class ProductService {
 
     public List<Product> displayByCategory(String category) {
         List<Product> results = new LinkedList<>(repository.getAll());
+        List<Product> sortedResults = new ArrayList<>();
         if (category == null || category.equals("")) {
             throw new IllegalArgumentException("неверная категория");
+        }
+        if (results.size() > maxIndex) {
+            results = results.subList(fromIndex, maxIndex);
         }
         System.out.println(category);
         for (Product p : results) {
             if (p.getProductCategory().equals(category)) {
-                System.out.println(p.toString());
+                sortedResults.add(p);
             }
         }
-        return results;
+        Collections.sort(sortedResults, (p1, p2) -> p1.getName().compareTo(p2.getName()));
+        return sortedResults;
     }
 
     public List<Product> getSortedByPriceAsc() {
@@ -77,30 +82,16 @@ public class ProductService {
 
     public List<Product> getSortedByName() {
         List<Product> results = new LinkedList<>(repository.getAll());
+        if (results.size() > maxIndex) {
+            results = results.subList(fromIndex, maxIndex);
+        }
         Collections.sort(results, (p1, p2) -> p1.getName().compareTo(p2.getName()));
         return results;
     }
-
-//    public List<Product> getSortedByPrice() {
-//        return getSortedBy(new ProductByPriceComparator());
-//    }
-//
-//    public List<Product> getSortedBy(Comparator<Product> comparator) {
-//        //List<Product> results = new LinkedList<>(repository.getAll());
-//        results.sort(comparator);
-//        return results;
-//    }
 
     public Collection<Product> display() {
         System.out.println(repository.getAll());
         return repository.getAll();
     }
-
-
-    @Override
-    public String toString() {
-        return repositoryName;
-    }
-
 
 }

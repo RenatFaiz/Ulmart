@@ -20,7 +20,7 @@ public class Main {
                         "технология Toshiba BiCS FLASH обеспечивает более высокую пропускную способность, " +
                         "выносливость, производительность и эффективность в одном и том же месте," +
                         " обеспечивая передовые технологии хранения.", 2450, "Комплектующие для ПК"));
-        service.addProduct(new Product(0, "SSD накопитель 360ГБ, 2.5\", " +
+        service.addProduct(new Product(0, "ASD накопитель 360ГБ, 2.5\", " +
                 "SATA III, Toshiba TR360, THN-TR20Z2400U8",
                 "SSD накопитель 360ГБ, 2.5\", " +
                         "SATA III, Toshiba TR200, THN-TR20Z2400U8", 4,
@@ -39,8 +39,8 @@ public class Main {
                         "выносливость, производительность и эффективность в одном и том же месте," +
                         " обеспечивая передовые технологии хранения.", 1800, "Жесткие диски"));
 //        System.out.println(service.getSortedByPriceDesc());
-        //  System.out.println(service.getSortedByName());
-        service.displayByCategory("Комплектующие для ПК");
+        System.out.println(service.getSortedByName());
+        System.out.println(service.displayByCategory("Комплектующие для ПК"));
 //        System.out.println(service.getSortedByRatingAsc());
 //        service.searchByName("SSD");
 

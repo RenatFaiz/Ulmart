@@ -4,14 +4,10 @@ import ru.itpark.model.Product;
 import ru.itpark.repository.ProductRepository;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 public class ProductService {
     private final ProductRepository repository;
     private String repositoryName = "Основной репозиторий";
-    //List list = getList();  // инициализируйте этот список
-    // Class<? extends ProductService> results = getClass();
-
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
@@ -34,6 +30,57 @@ public class ProductService {
         }
     }
 
+    public List<Product> searchByName(String name) {
+        List<Product> results = new LinkedList<>(repository.getAll());
+        if (name == null || name.equals("")) {
+            throw new IllegalArgumentException("введите название");
+        }
+        for (Product p : results) {
+            if (p.getName().toLowerCase().contains(name.toLowerCase())) {
+                System.out.println(p.toString());
+            }
+        }
+        return results;
+    }
+
+    public List<Product> displayByCategory(String category) {
+        List<Product> results = new LinkedList<>(repository.getAll());
+        if (category == null || category.equals("")) {
+            throw new IllegalArgumentException("неверная категория");
+        }
+        System.out.println(category);
+        for (Product p : results) {
+            if (p.getProductCategory().equals(category)) {
+                System.out.println(p.toString());
+            }
+        }
+        return results;
+    }
+
+    public List<Product> getSortedByPriceAsc() {
+        List<Product> results = new LinkedList<>(repository.getAll());
+        Collections.sort(results, (p1, p2) -> p1.getPrice() - p2.getPrice());
+        return results;
+    }
+
+    public List<Product> getSortedByPriceDesc() {
+        List<Product> results = new LinkedList<>(repository.getAll());
+        Collections.sort(results, (p1, p2) -> -(p1.getPrice() - p2.getPrice()));
+        return results;
+    }
+
+    public List<Product> getSortedByRatingAsc() {
+        List<Product> results = new LinkedList<Product>(repository.getAll());
+        Collections.sort(results, (p1, p2) -> (int) (p1.getRating() - p2.getRating()));
+        return results;
+    }
+
+    public List<Product> getSortedByName() {
+        List<Product> results = new LinkedList<>(repository.getAll());
+        Collections.sort(results, (p1, p2) -> p1.getName().compareTo(p2.getName()));
+        return results;
+    }
+
 //    public List<Product> getSortedByPrice() {
 //        return getSortedBy(new ProductByPriceComparator());
 //    }
@@ -49,17 +96,6 @@ public class ProductService {
         return repository.getAll();
     }
 
-    public List<Product> getSortedByName() {
-        List<Product> results = new LinkedList<>(repository.getAll());
-        results.sort((Comparator<Product>) (p1, p2) -> p1.getName().compareTo(p2.getName()));
-        return results;
-    }
-
-    public List<Product> getSortedByPriceAsc() {
-        List<Product> results = new LinkedList<>(repository.getAll());
-        Collections.sort(results, (Comparator<Product>) (p1, p2) -> p1.getPrice() - p2.getPrice());
-        return results;
-    }
 
     @Override
     public String toString() {
@@ -67,22 +103,4 @@ public class ProductService {
     }
 
 
-    public List<Product> searchByName(String name) {
-        List<Product> results = new LinkedList<>(repository.getAll());
-        if (name == null || name.equals("")) {
-            throw new IllegalArgumentException("введите название");
-        }
-        for (Product p : results) {
-            if (p.getName().toLowerCase().contains(name.toLowerCase())) {
-                System.out.println(p.toString());
-            }
-        }
-        return results;
-    }
 }
-
-
-//    public List<Product> displayByCategory(Product item) {
-//        List<Product> category = new ArrayList<>();
-//        return category;
-//    }

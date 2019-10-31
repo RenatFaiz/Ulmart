@@ -1,4 +1,4 @@
-# ДЗ: Юлмарт 
+# ДЗ: Юлмарт [![Build Status](https://travis-ci.com/RenatFaiz/Ulmart.svg?branch=master)](https://travis-ci.com/RenatFaiz/Ulmart)
 Написать приложение, которое может хранить товары разных типов:\
 смартфоны, компьютеры, телевизоры, футболки, горшки и т.д. (см. на 
 юлмарт/ситилинк) 

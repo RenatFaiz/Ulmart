@@ -6,6 +6,7 @@ import ru.itpark.repository.ProductRepository;
 import java.util.*;
 
 public class ProductService {
+
     private final ProductRepository repository;
     private int fromIndex = 0;
     private int maxIndex = 10;
@@ -58,25 +59,25 @@ public class ProductService {
                 sortedResults.add(p);
             }
         }
-        Collections.sort(sortedResults, (p1, p2) -> p1.getName().compareTo(p2.getName()));
+        sortedResults.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
         return sortedResults;
     }
 
     public List<Product> getSortedByPriceAsc() {
         List<Product> results = new LinkedList<>(repository.getAll());
-        Collections.sort(results, (p1, p2) -> p1.getPrice() - p2.getPrice());
+        results.sort((p1, p2) -> p1.getPrice() - p2.getPrice());
         return results;
     }
 
     public List<Product> getSortedByPriceDesc() {
         List<Product> results = new LinkedList<>(repository.getAll());
-        Collections.sort(results, (p1, p2) -> -(p1.getPrice() - p2.getPrice()));
+        results.sort((p1, p2) -> -(p1.getPrice() - p2.getPrice()));
         return results;
     }
 
     public List<Product> getSortedByRatingAsc() {
         List<Product> results = new LinkedList<Product>(repository.getAll());
-        Collections.sort(results, (p1, p2) -> (int) (p1.getRating() - p2.getRating()));
+        results.sort((p1, p2) -> (int) (p1.getRating() - p2.getRating()));
         return results;
     }
 
@@ -85,11 +86,11 @@ public class ProductService {
         if (results.size() > maxIndex) {
             results = results.subList(fromIndex, maxIndex);
         }
-        Collections.sort(results, (p1, p2) -> p1.getName().compareTo(p2.getName()));
+        results.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
         return results;
     }
 
-    public Collection<Product> display() {
+    public Collection<Product> displayAll() {
         System.out.println(repository.getAll());
         return repository.getAll();
     }

@@ -42,11 +42,11 @@ public class Main {
         System.out.println(service.getSortedByPriceAsc());
         System.out.println(service.getSortedByPriceDesc());
         System.out.println(service.getSortedByName());
-        System.out.println(service.displayByCategory("Комплектующие для ПК"));
         System.out.println(service.getSortedByRatingAsc());
 
-        service.searchByName("SSD");
+        System.out.println(service.displayByCategory("Комплектующие для ПК"));
+        System.out.println(service.searchByName("SSD"));
         service.deleteProduct(1);
-        service.displayAll();
+        System.out.println(service.displayAll());
     }
 }

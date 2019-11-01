@@ -5,7 +5,7 @@ import ru.itpark.model.Product;
 import java.util.Collection;
 import java.util.LinkedList;
 
-public class ProductRepository<T> {
+public class ProductRepository {
 
     private final Collection<Product> products = new LinkedList<>();
     private long nextId = 1;

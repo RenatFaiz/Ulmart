@@ -26,34 +26,38 @@ public class ProductService {
     }
 
     public void deleteProduct(long id) {
-        if (id > 0) {
-            repository.delete(id);
+        if (id <= 0) {
+            throw new IllegalArgumentException("неверное id, должен быть больше ноля");
         }
+        repository.delete(id);
     }
 
     public List<Product> searchByName(String name) {
-        List<Product> results = new LinkedList<>(repository.getAll());
-        if (name == null || name.equals("")) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("введите название");
         }
-        for (Product p : results) {
-            if (p.getName().toLowerCase().contains(name.toLowerCase())) {
-                System.out.println(p.toString());
-            }
-        }
-        return results;
-    }
-
-    public List<Product> displayByCategory(String category) {
         List<Product> results = new LinkedList<>(repository.getAll());
-        List<Product> sortedResults = new ArrayList<>();
-        if (category == null || category.equals("")) {
-            throw new IllegalArgumentException("неверная категория");
-        }
         if (results.size() > maxIndex) {
             results = results.subList(fromIndex, maxIndex);
         }
-        System.out.println(category);
+        List<Product> sortedResults = new ArrayList<>();
+        for (Product p : results) {
+            if (p.getName().toLowerCase().contains(name.toLowerCase())) {
+                sortedResults.add(p);
+            }
+        }
+        return sortedResults;
+    }
+
+    public List<Product> displayByCategory(String category) {
+        if (category == null || category.isBlank()) {
+            throw new IllegalArgumentException("неверная категория");
+        }
+        List<Product> results = new LinkedList<>(repository.getAll());
+        if (results.size() > maxIndex) {
+            results = results.subList(fromIndex, maxIndex);
+        }
+        List<Product> sortedResults = new ArrayList<>();
         for (Product p : results) {
             if (p.getProductCategory().equals(category)) {
                 sortedResults.add(p);
@@ -91,7 +95,6 @@ public class ProductService {
     }
 
     public Collection<Product> displayAll() {
-        System.out.println(repository.getAll());
         return repository.getAll();
     }
 
